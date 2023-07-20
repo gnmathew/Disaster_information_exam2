@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @posts = Post.includes(:categories).all
   end
 
   def show
@@ -49,6 +50,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :address)
+    params.require(:post).permit(:title, :content, :address, category_ids: [])
   end
 end
