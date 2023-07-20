@@ -13,6 +13,6 @@ class Api::V1::CitiesController < ApplicationController
 
   def show
     city = Address::City.find(params[:id])
-    render json: city
+    render json: cities, each_serializer: CitySerializer
   end
 end
