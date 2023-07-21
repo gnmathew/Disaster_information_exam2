@@ -5,5 +5,5 @@
   <li><%= @post.address %></li>
   <li><%= @post.user&.email %></li>
 </ul>
-
+<p>Short URL: <%= request.base_url %>/<%= @post.short_url %></p>
 <%= link_to 'Posts', posts_path %>

@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   get 'welcome' => 'welcome#index'
 
+  resources :posts
+  get '/:short_url', to: 'posts#short_url_redirect'
+
   root 'posts#index'
   
   namespace :user do

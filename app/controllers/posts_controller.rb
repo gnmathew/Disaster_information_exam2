@@ -9,6 +9,16 @@ class PostsController < ApplicationController
   def show
   end
 
+  def short_url_redirect
+    @post = Post.find_by(short_url: params[:short_url])
+
+    if @post
+      redirect_to post_path(@post), status: :moved_permanently
+    else
+      render file: "#{Rails.root}/public/404.html", status: :not_found, layout: false
+    end
+  end
+
   def new
     @post = Post.new
   end
