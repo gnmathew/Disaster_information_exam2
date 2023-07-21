@@ -1,0 +1,14 @@
+<%= current_user.email %>
+<h2>My Comments</h2> 
+
+<ul>
+  <% @comments.each do |comment| %>
+    <li>
+      <%= comment.content %>(<%= comment.created_at %>) by <%= comment.user&.email %> 
+      <%= link_to 'Edit', edit_user_comment_path(comment) if user_signed_in? && comment.user == current_user %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Posts', posts_path %> |
+<%= link_to 'My Posts', user_posts_path %>

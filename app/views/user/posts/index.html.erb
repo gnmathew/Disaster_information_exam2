@@ -1,0 +1,13 @@
+<%= current_user.email %>
+<h1>My Posts</h1>
+
+<ul>
+  <% @posts.each do |post| %>
+    <li>Title: <%= post.title %><br>
+    Content: <%= post.content %><br>
+    <%= link_to 'Edit', edit_post_path(post) %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Posts', posts_path %> |
+<%= link_to 'My Comments', user_comments_path%>

@@ -1,10 +1,11 @@
 <% if user_signed_in? %>
   <h5> Hello <%= current_user.email %> </h5>
-  <%= link_to 'Sign out', destroy_user_session_path, data: { 'turbo-method': :delete } %>
+  <%= link_to 'Sign out', destroy_user_session_path, data: { 'turbo-method': :delete } %> |
 <% else %>
-  <%= link_to 'Sign in', new_user_session_path %>
+  <%= link_to 'Sign in', new_user_session_path %> |
 <% end %>
 
+<%= link_to 'My Posts', user_posts_path %>
 <h1>Post Disaster List</h1>
 <table>
   <thead>
