@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  root 'posts#index'
+  
   get 'welcome' => 'welcome#index'
 
   resources :posts
-  get '/:short_url', to: 'posts#short_url_redirect'
 
-  root 'posts#index'
+  resources :categories, except: :show
+  
+  get '/:short_url', to: 'posts#short_url_redirect'
   
   namespace :user do
     resources :posts, :comments
@@ -15,8 +18,6 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, except: :show
   end
-
-  resources :categories, except: :show
 
   namespace :api do
     namespace :v1 do
