@@ -3,6 +3,7 @@
   <li><%= @post.title %></li>
   <li><%= @post.content %></li>
   <li><%= @post.address %></li>
+  <li><%= @post.user&.email %></li>
 </ul>
 
 <%= link_to 'Posts', posts_path %>
