@@ -14,6 +14,7 @@
   <td>Address</td>
   <td>Category</td>
   <td>User</td>
+  <td>Location</td>
   <td>Action</td>
   </thead>
   <% @posts.each do |post| %>
@@ -23,6 +24,14 @@
       <td><%= post.address %></td>
       <td><%= post.categories.pluck(:name).join(',') %></td>
       <td><%= post.user&.email %></td>
+      <td>
+        <% geocode_result = Geocoder.search(post.ip_address).first %>
+        <% if geocode_result %>
+          <p><%= geocode_result.country %> | <%= geocode_result.city %></p>
+        <% else %>
+          <p>Location Not Available</p>
+        <% end %>
+      </td>
       <td>
         <%= link_to 'Show', post_path(post) %> |
         <%= link_to 'Edit', edit_post_path(post) if policy(post).edit? %>
