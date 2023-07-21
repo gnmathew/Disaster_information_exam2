@@ -3,8 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :validate_post_owner, only: [:edit, :update, :destroy]
   def index
-    @posts = Post.all
-    @posts = Post.includes(:categories, :user).all
+    @posts = Post.includes(:categories, :user).page(params[:page]).per(5).all
   end
 
   def show
