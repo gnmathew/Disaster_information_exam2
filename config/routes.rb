@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
+  get 'csv_imports/new'
+  get 'csv_imports/create'
   devise_for :users
 
   root 'posts#index'
   
   get 'welcome' => 'welcome#index'
+
+  resources :csv_imports, only: [:new, :create]
+
+  get '/export', to: 'export#export_to_csv'
 
   resources :posts
 
