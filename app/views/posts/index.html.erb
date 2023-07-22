@@ -4,8 +4,13 @@
 <% else %>
   <%= link_to 'Sign in', new_user_session_path %> |
 <% end %>
-
 <%= link_to 'My Posts', user_posts_path %>
+
+<%= form_with(url: csv_imports_path, method: :post, local: true, multipart: true) do |form| %>
+  <%= form.file_field :file %>
+  <%= form.submit 'Import CSV', class: 'btn btn-primary' %>
+<% end %>
+
 <h1>Post Disaster List</h1>
 <table>
   <thead>
@@ -48,4 +53,7 @@
 
 <%= link_to 'New', new_post_path %> |
 <%= link_to 'Category', categories_path %>
+    
+<%= link_to 'Export Data to CSV', export_path, class: 'btn btn-success' %>
+
 <%= paginate @posts %>
