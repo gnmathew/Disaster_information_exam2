@@ -21,7 +21,7 @@
     <tr>
       <td><%= post.title %></td>
       <td><%= post.content %></td>
-      <td><%= post.address %></td>
+      <td><%= "#{post.region&.name} #{post.province&.name} #{post.address}" %></td>
       <td><%= post.categories.pluck(:name).join(',') %></td>
       <td><%= post.user&.email %></td>
       <td>

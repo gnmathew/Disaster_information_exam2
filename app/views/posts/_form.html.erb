@@ -1,4 +1,4 @@
-<%= form_with model: post do |form| %>
+<%= form_with model: post, data: { controller: :location } do |form| %> 
   <% if post.errors.any? %>
     <ul>
       <% post.errors.each do |error| %>
@@ -20,6 +20,24 @@
   </div>
   <div>
     <%= form.collection_check_boxes :category_ids, Category.all, :id, :name, checked: @post.category_ids %>
+  </div>
+  <div>
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+  <div>
+    <%= form.label :address_region_id %>
+    <%= form.collection_select :address_region_id,
+                               Address::Region.all, :id, :name,
+                               { prompt: 'Please select region' },
+                                data: { location_target: 'selectedRegionId', action: 'change->location#fetchProvinces' } %>
+  </div>
+  <div>
+    <%= form.label :address_provinces_id %>
+    <%= form.collection_select :address_provinces_id,
+                               [], nil, nil,
+                               { prompt: 'Please select province' },
+                               data: { location_target: 'selectProvinceId' } %>
   </div>
   <%= form.submit %>
 <% end %>

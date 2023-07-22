@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   
   def index
-    @posts = Post.includes(:categories, :user).page(params[:page]).per(5).all
+    @posts = Post.includes(:categories, :user, :region, :province).page(params[:page]).per(5).all
   end
 
   def show
@@ -70,6 +70,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :address, category_ids: [])
+    params.require(:post).permit(:title, :content, :address, :address_region_id, :address_province_id, category_ids: [])
   end
 end

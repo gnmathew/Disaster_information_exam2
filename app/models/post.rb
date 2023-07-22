@@ -10,6 +10,8 @@ class Post < ApplicationRecord
   has_many :post_category_ships
   has_many :categories, through: :post_category_ships
   belongs_to :user
+  belongs_to :region, class_name: 'Address::Region', foreign_key: 'address_region_id'
+  belongs_to :province, class_name: 'Address::Province', foreign_key: 'address_province_id'
 
   geocoded_by :ip_address
 
