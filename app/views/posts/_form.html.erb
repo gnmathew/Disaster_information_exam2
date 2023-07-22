@@ -15,10 +15,6 @@
     <%= form.text_field :content %>
   </div>
   <div>
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-  <div>
     <%= form.collection_check_boxes :category_ids, Category.all, :id, :name, checked: @post.category_ids %>
   </div>
   <div>
@@ -34,10 +30,24 @@
   </div>
   <div>
     <%= form.label :address_provinces_id %>
-    <%= form.collection_select :address_provinces_id,
+    <%= form.collection_select :address_province_id,
                                [], nil, nil,
                                { prompt: 'Please select province' },
-                               data: { location_target: 'selectProvinceId' } %>
+                               data: { location_target: 'selectedProvinceId', action: 'change->location#fetchCities' } %>
+  </div>
+  <div>
+    <%= form.label :address_city_id %>
+    <%= form.collection_select :address_city_id,
+                               [], nil, nil,
+                               { prompt: 'Please select city' },
+                               data: { location_target: 'selectedCityId', action: 'change->location#fetchBarangays' } %>
+  </div>
+  <div>
+    <%= form.label :address_barangay_id %>
+    <%= form.collection_select :address_barangay_id,
+                               [], nil, nil,
+                               { prompt: 'Please select barangay' },
+                               data: { location_target: 'selectedBarangayId' } %>
   </div>
   <%= form.submit %>
 <% end %>
