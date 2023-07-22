@@ -9,7 +9,7 @@ export default class extends Controller {
 
     $.ajax({
       type: 'GET',
-      url: '/api/regions/' + this.selectedRegionIdTarget.value + '/provinces',
+      url: '/api/v1/regions/' + this.selectedRegionIdTarget.value + '/provinces',
       dataType: 'json',
       success: (response) => {
         console.log(response)
