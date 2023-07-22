@@ -5,7 +5,7 @@ export default class extends Controller {
 
   copy() {
     navigator.clipboard.writeText(this.emailTarget.textContent);
-    document.getElementsByClassName("notice")[0].innerText = 'copy email: ' + this.emailTarget.textContent
+    $(".notice:eq(0)").text('copy email: ' + this.emailTarget.textContent);
   }
 }
 import ClipboardController from "./clipboard_controller";
