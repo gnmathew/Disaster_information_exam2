@@ -6,4 +6,4 @@ Geocoder.configure(
     api_key: 'YOUR_API_KEY',
   
     # Other configuration options...
-  )
+)
