@@ -82,6 +82,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_052715) do
     t.string "ip_address"
     t.bigint "address_region_id"
     t.bigint "address_province_id"
+    t.bigint "address_city_id"
+    t.bigint "address_barangay_id"
+    t.index ["address_barangay_id"], name: "index_posts_on_address_barangay_id"
+    t.index ["address_city_id"], name: "index_posts_on_address_city_id"
     t.index ["address_province_id"], name: "index_posts_on_address_province_id"
     t.index ["address_region_id"], name: "index_posts_on_address_region_id"
     t.index ["short_url"], name: "index_posts_on_short_url", unique: true
