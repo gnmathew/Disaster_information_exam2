@@ -23,7 +23,10 @@
       <td><%= post.content %></td>
       <td><%= "#{post.region&.name} #{post.province&.name} #{post.address}" %></td>
       <td><%= post.categories.pluck(:name).join(',') %></td>
-      <td><%= post.user&.email %></td>
+      <td data-controller="clipboard">
+        <span data-clipboard-target="email"><%= post.user&.email %></span>
+        <button data-action="click->clipboard#copy">copy</button>
+      </td>
       <td>
         <% geocode_result = Geocoder.search(post.ip_address).first %>
         <% if geocode_result %>
