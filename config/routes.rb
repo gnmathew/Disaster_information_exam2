@@ -1,21 +1,19 @@
 Rails.application.routes.draw do
-  get 'csv_imports/new'
-  get 'csv_imports/create'
   devise_for :users
 
   root 'posts#index'
   
   get 'welcome' => 'welcome#index'
 
-  resources :csv_imports, only: [:new, :create]
+  get '/import', to: 'posts#import_new', as: 'import_path'
 
-  get '/export', to: 'export#export_to_csv'
+  post '/import', to: 'posts#import_create'
+
+  get '/export', to: 'posts#export_to_csv'
 
   resources :posts
 
   resources :categories, except: :show
-  
-  get '/:short_url', to: 'posts#short_url_redirect'
   
   namespace :user do
     resources :posts, :comments
@@ -42,4 +40,6 @@ Rails.application.routes.draw do
       resources :barangays, only: %i[index show], defaults: { format: :json }
     end
   end
+
+  get '/:short_url', to: 'posts#short_url_redirect'
 end

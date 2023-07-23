@@ -6,7 +6,7 @@
 <% end %>
 <%= link_to 'My Posts', user_posts_path %>
 
-<%= form_with(url: csv_imports_path, method: :post, local: true, multipart: true) do |form| %>
+<%= form_with(url: import_path, method: :post, local: true, multipart: true) do |form| %>
   <%= form.file_field :file %>
   <%= form.submit 'Import CSV', class: 'btn btn-primary' %>
 <% end %>
