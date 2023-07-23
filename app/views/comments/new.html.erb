@@ -1,3 +1,5 @@
 <h1>Title: <%= @post.title %></h1>
 
 <%= render partial: 'form', locals: { post: @post, comment: @comment, path: post_comments_path(@post) } %>
+<br>
+<%= link_to 'All Posts', posts_path, class: "btn btn-secondary" %>

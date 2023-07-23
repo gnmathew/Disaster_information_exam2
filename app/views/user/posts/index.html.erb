@@ -1,13 +1,16 @@
 <%= current_user.email %>
 <h1>My Posts</h1>
 
-<ul>
+<ul class="list-group" >
   <% @posts.each do |post| %>
-    <li>Title: <%= post.title %><br>
+    <li class="list-group-item list-group-item-dark">
+    Title: <%= post.title %><br>
     Content: <%= post.content %><br>
-    <%= link_to 'Edit', edit_post_path(post) %></li>
+    <%= link_to 'Edit', edit_post_path(post),class: "btn btn-secondary"  %></li>
   <% end %>
 </ul>
-
-<%= link_to 'Posts', posts_path %> |
-<%= link_to 'My Comments', user_comments_path%>
+<br>
+<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+  <%= link_to 'All Posts', posts_path, class: "btn btn-dark"%>
+  <%= link_to 'My Comments', user_comments_path, class: "btn btn-secondary" %>
+</div>

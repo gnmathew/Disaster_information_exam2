@@ -1,3 +1,5 @@
 <h1>Title: <%= @post.title %></h1>
 <h2>Edit Comment ID: <%= @comment.id %></h2>
 <%= render partial: 'form', locals: { post: @post, comment: @comment, path: post_comment_path(@post, @comment) } %>
+<br>
+<%= link_to 'All Posts', posts_path, class: "btn btn-secondary" %>

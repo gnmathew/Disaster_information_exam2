@@ -1,5 +1,6 @@
 <h1>Edit Post Disaster id: <%= @post.id %></h1>
 
 <%= render partial: 'form', locals: { post: @post } %>
+<br>
 
-<%= link_to 'Posts', posts_path %>
+<%= link_to 'All Posts', posts_path, class: "btn btn-secondary" %>

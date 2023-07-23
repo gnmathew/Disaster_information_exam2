@@ -6,13 +6,15 @@
       <% end %>
     </ul>
   <% end %>
-  <div>
+  <div class="form-group">
     <%= form.label :content %>
-    <%= form.text_field :content %>
+    <%= form.text_field :content, class: "form-control"  %>
   </div>
-  <%= form.submit %>
+  <%= form.submit class:"btn btn-primary" %>
 <% end %>
-
-<%= link_to 'Posts', posts_path %> |
-<%= link_to 'My Posts', user_posts_path %> |
-<%= link_to 'My Comments', user_comments_path%>
+<br>
+<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+ <%= link_to 'All Posts', posts_path, class: "btn btn-dark" %>
+<%= link_to 'My Posts', user_posts_path, class: "btn btn-secondary"  %> 
+<%= link_to 'My Comments', user_comments_path, class: "btn btn-dark" %>
+</div>

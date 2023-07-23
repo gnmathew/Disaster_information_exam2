@@ -1,9 +1,14 @@
-<h1>Disaster Post id: <%= @post.id %></h1>
-<ul>
-  <li><%= @post.title %></li>
-  <li><%= @post.content %></li>
-  <li><%= @post.address %></li>
-  <li><%= @post.user&.email %></li>
-</ul>
-<p>Short URL: <%= request.base_url %>/<%= @post.short_url %></p>
-<%= link_to 'Posts', posts_path %>
+<div class="card text-center mx-auto" style="width: 750px">
+  <div class="card-header card bg-dark text-white">
+    <%= @post.title %>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= @post.user&.email %></h5>
+    <p class="card-text"><%= @post.content %></p>
+    <p class="card-text"><%= @post.address %></p>
+    <%= link_to 'Posts', posts_path, class: "btn btn-dark" %>
+  </div>
+  <div class="card-footer text-body-secondary">
+    Short URL: <%= request.base_url %>/<%= @post.short_url %>
+  </div>
+</div>
