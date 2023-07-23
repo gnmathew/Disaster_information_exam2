@@ -1,3 +1,4 @@
+require 'csv'
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
@@ -59,14 +60,56 @@ class PostsController < ApplicationController
   def destroy
     authorize @post, :destroy?, policy_class: PostPolicy
     @post.destroy
-    flash[:notice] = 'Post destroyed successfully'
+    'Post destroyed successfully'
     redirect_to posts_path
+  end
+
+#create and new method for importing csv
+  def import_new; end
+
+  def import_create
+    if params[:file].present?
+      process_csv_file(params[:file])
+      flash[:notice] = 'CSV data imported successfully!'
+      redirect_to posts_path
+    else
+      redirect_to posts_path, alert: 'Please select a CSV file to import.'
+    end
+  end
+  
+# method for exporting csv
+  def export_to_csv
+    data = Address::Region.includes(provinces: { cities: :barangays })
+    csv_data = CSV.generate do |csv|
+      data.each do |region|
+        csv << ["Region: #{region.name}"]
+
+        region.provinces.each do |province|
+          csv << ["Province: #{province.name}"]
+
+          province.cities.each do |city|
+            csv << ["City: #{city.name}"]
+
+            city.barangays.each do |barangay|
+              csv << ["Barangay: #{barangay.name}"]
+            end
+          end
+        end
+      end 
+    end
+    send_data csv_data, filename: 'philippine_data.csv'
   end
 
   private
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def process_csv_file(file)
+    CSV.foreach(file.path) do |row|
+  
+    end
   end
 
   def post_params
