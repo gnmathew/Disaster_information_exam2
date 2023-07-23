@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :posts
 
-  resources :categories, except: :show
+  resources :categories, only: :index
   
   namespace :user do
     resources :posts, :comments
