@@ -1,23 +1,9 @@
-<h1 class="text-center">Post Disaster List</h1>
+<h1 class="text-center text-muted">Disaster List</h1>
 
-<% if user_signed_in? %>
-  <h5 class="text-end"> Hello <%= current_user.email %> </h5>
-  <div class="d-flex justify-content-end" >
-    <%= link_to 'Sign out', destroy_user_session_path, class: "btn btn-light", data: { 'turbo-method': :delete } %>
-  </div>
-<% else %>
-  <%= link_to 'Sign in', new_user_session_path, class: "btn btn-light" %>
-<% end %>
+ 
 
-<div class="d-flex justify-content-center" >
-  <%= link_to 'My Posts', user_posts_path, class: "btn btn-light" %>
-</div>
-<%= form_with(url: import_path, method: :post, local: true, multipart: true) do |form| %>
-  <%= form.file_field :file %><br>
-  <%= form.submit 'Import CSV', class: 'btn btn-primary' %>
-<% end %>
 
-<table class="table table-hover" >
+<table class="table table-hover w-75 mx-auto text-center" >
   <thead>
     <tr class="table-dark text-center">
       <td>Title</td>
@@ -32,7 +18,10 @@
   <% @posts.each do |post| %>
     <tr class="table-secondary">
       <td><%= post.title %></td>
-      <td><%= post.content %></td>
+      <td>
+        <%= post.content %><br>
+        <%= link_to 'Comments', post_comments_path(post), class: "btn-sm btn btn-dark" %>
+      </td>
       <td><%= "#{post.region&.name} #{post.province&.name} #{post.city&.name} #{post.barangay&.name} #{post.address}" %></td>
       <td><%= post.categories.pluck(:name).join(',') %></td>
       <td><%= post.user&.email %></td>
@@ -45,25 +34,19 @@
         <% end %>
       </td>
       <td>
-        <%= link_to 'Show', post_path(post), class: "btn btn-secondary"%>
-        <%= link_to 'Edit', edit_post_path(post), class: "btn btn-dark" if policy(post).edit? %>
-        <%= button_to 'Delete', post_path(post), class: "btn btn-danger", method: :delete if policy(post).destroy? %>
+        <%= link_to 'Show', post_path(post), class: "btn-sm btn btn-secondary"%>
       </td>
-      <td class="text-center">
-        <%= link_to 'New Comment', new_post_comment_path(post), class: "btn btn-light" %> 
-        <%= link_to 'Comments', post_comments_path(post), class: "btn btn-dark" %>
+      <td>
+        <%= link_to 'Edit', edit_post_path(post), class: "btn-sm btn btn-dark" if policy(post).edit? %>
+      </td>
+      <td>
+        <%= button_to 'Delete', post_path(post), class: "btn-sm btn btn-danger", method: :delete if policy(post).destroy? %>
+      </td>
+      <td>
+        <%= link_to 'New Comment', new_post_comment_path(post), class: " btn-sm btn btn-light" %>
       </td>
     </tr>
   <% end %>
 </table>
-<div class="d-flex justify-content-end" >   
-  <%= link_to 'Export Data to CSV', export_path, class: 'btn btn-success' %>
-</div>
-<%= link_to 'New', new_post_path, class: "btn btn-dark" %> 
-<%= link_to 'Category', categories_path, class: "btn btn-secondary" %>
 
-
-  <%= paginate @posts%>
-
-
-   
+<%= paginate @posts %>

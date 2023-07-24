@@ -1,15 +1,13 @@
-<h1 class="text-center">Disaster Category</h1>
+<h1 class="text-center text-muted">Disaster Category</h1>
 
-<ul class="list-group mx-auto" style="width: 750px">
+<ul class="list-group mx-auto" style="width: 450px">
   <% @categories.each do |category| %>
-    <li class="list-group-item list-group-item-secondary">
+    <li class="list-group-item list-group-item-secondary text-center">
       <%= category.name %>
-      <%#= link_to :edit, edit_category_path(category) %>
-      <%#= button_to :delete, category_path(category), method: :delete %>
     </li>
   <% end %>
 </ul>
 <br>
 <div class="d-flex justify-content-center" >
-  <%= link_to 'All Posts', posts_path, class: "btn btn-dark" %>
+  <%= link_to 'All Post', posts_path, class: "btn btn-dark" %>
 </div>

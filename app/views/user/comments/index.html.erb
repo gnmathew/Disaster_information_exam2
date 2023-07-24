@@ -1,17 +1,19 @@
-<%= current_user.email %>
-<h2>My Comments</h2> 
+<h5 class= "text-muted text-center"><%= current_user.email %></h5>
+<h2 class= "text-muted text-center">My Comments</h2> 
 
-<ul class="list-group ">
+<ul class="list-group list-group text-center mx-auto" style="width: 750px"">
   <% @comments.each do |comment| %>
     <li class="list-group-item list-group-item-dark">
-      <%= comment.content %>(<%= comment.created_at %>) by <%= comment.user&.email %> 
+      <h5><%= comment.content %></h5><br>(<%= comment.created_at %>) by <%= comment.user&.email %><br>
       <%= link_to 'Edit', edit_user_comment_path(comment),class: "btn btn-secondary" if user_signed_in? && comment.user == current_user %>
     </li>
   <% end %>
 </ul>
 <br>
 
-<div class="btn-group" role="group" aria-label="Basic mixed styles example">
-  <%= link_to 'All Posts', posts_path, class: "btn btn-dark"%>
-  <%= link_to 'My Posts', user_posts_path, class: "btn btn-secondary" %>
-</div>
+<div class="d-flex justify-content-center">
+  <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+    <%= link_to 'All Posts', posts_path, class: "btn btn-dark" %> 
+    <%= link_to 'My Comments', user_comments_path, class: "btn btn-secondary" %>
+  </div>
+</div>  

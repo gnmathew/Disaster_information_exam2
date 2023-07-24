@@ -1,5 +1,9 @@
-<h1>Title: <%= @post.title %></h1>
-<h2>Edit Comment ID: <%= @comment.id %></h2>
+<h1 class="text-center mx-auto text-muted">Title: <%= @post.title %></h1>
+<h2 class="text-center mx-auto text-muted">Edit Comment ID: <%= @comment.id %></h2>
 <%= render partial: 'form', locals: { post: @post, comment: @comment, path: post_comment_path(@post, @comment) } %>
 <br>
-<%= link_to 'All Posts', posts_path, class: "btn btn-secondary" %>
+<div class="d-flex justify-content-center">
+  <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+    <%= link_to 'All Posts', posts_path, class: "btn btn-dark" %> 
+  </div>
+</div>

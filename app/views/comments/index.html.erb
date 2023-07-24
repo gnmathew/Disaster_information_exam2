@@ -1,17 +1,20 @@
-<h1>Title <%= @post.title %></h1>
-<h2>Comments</h2>
+<h1 class="text-center mx-auto text-muted">Title <%= @post.title %></h1>
+<h3 class="text-center mx-auto text-muted">Comments</h3>
 
-<%= paginate @comments %>
-
-
-<ul class="list-group">
+<ul class="list-group text-center mx-auto" style="width: 750px">
   <% @comments.each do |comment| %>
-    <li class="list-group-item list-group-item-dark">
-      <%= comment.content %>(<%= comment.created_at %>) by <%= comment.user&.email %> 
+    <li class="list-group-item list-group-item-dark ">
+      <h5><%= comment.content %></h5><br>(<%= comment.created_at %>) by <%= comment.user&.email %> 
       <%= link_to 'Edit', edit_post_comment_path(@post, comment),class: "btn btn-secondary" if user_signed_in? && comment.user == current_user %>
       <%= button_to 'Delete', post_comment_path(@post, comment), class: "btn btn-light", method: :delete if user_signed_in? && comment.user == current_user %>
     </li>
   <% end %>
 </ul>
 <br>
-<%= link_to 'All Posts', posts_path, class: "btn btn-secondary" %>    
+
+<div class="d-flex justify-content-center">
+  <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+    <%= link_to 'All Posts', posts_path, class: "btn btn-dark" %> 
+  </div>
+</div>
+<%= paginate @comments %>

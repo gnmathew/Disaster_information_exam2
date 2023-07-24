@@ -1,31 +1,67 @@
-<h1>Edit My Post</h1>
-<%= form_with model: post do |form| %>
-  <% if post.errors.any? %>
-    <ul>
-      <% post.errors.each do |error| %>
-        <li><%= error.full_message %></li>
+</div><div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <%= form_with model: @post, data: { controller: :location } do |form| %> 
+        <% if @post.errors.any? %>
+          <ul>
+            <% post.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+        <div class="form-group">
+          <%= form.label :title %>
+          <%= form.text_field :title, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :content %>
+          <%= form.text_field :content, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.collection_check_boxes :category_ids, Category.all, :id, :name, checked: @post.category_ids %>
+        </div>
+        <div class="form-group">
+          <%= form.label :address %>
+          <%= form.text_field :address, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :address_region_id %>
+          <%= form.collection_select :address_region_id,
+                                     Address::Region.all, :id, :name,
+                                     { prompt: 'Please select region' },
+                                     data: { location_target: 'selectedRegionId', action: 'change->location#fetchProvinces' }, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :address_province_id %>
+          <%= form.collection_select :address_province_id,
+                                     [], nil, nil,
+                                     { prompt: 'Please select province' },
+                                     data: { location_target: 'selectedProvinceId', action: 'change->location#fetchCities' }, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :address_city_id %>
+          <%= form.collection_select :address_city_id,
+                                     [], nil, nil,
+                                     { prompt: 'Please select city' },
+                                     data: { location_target: 'selectedCityId', action: 'change->location#fetchBarangays' }, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :address_barangay_id %>
+          <%= form.collection_select :address_barangay_id,
+                                     [], nil, nil,
+                                     { prompt: 'Please select barangay' },
+                                     data: { location_target: 'selectedBarangayId' }, class: "form-control" %>
+        </div>
+        <%= form.submit class: "btn btn-primary" %>
       <% end %>
-    </ul>
-  <% end %>
-  <div class="form-group">
-    <%= form.label :title %>
-    <%= form.text_field :title, class: "form-control" %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= form.label :content %>
-    <%= form.text_field :content, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= form.label :address %>
-    <%= form.text_field :address, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %>
-  </div>
-  <%= form.submit class: "btn btn-primary"%>
-<% end %>
-
-<div class="btn-group" role="group" aria-label="Basic mixed styles example">
-  <%= link_to 'All Posts', posts_path, class: "btn btn-dark"%>
-  <%= link_to 'My Posts', user_posts_path, class: "btn btn-secondary" %>
 </div>
+<br>
+
+<div class="d-flex justify-content-center">
+  <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+    <%= link_to 'All Posts', posts_path, class: "btn btn-dark" %> 
+    <%= link_to 'My Comments', user_comments_path, class: "btn btn-secondary" %>
+  </div>
+</div>  

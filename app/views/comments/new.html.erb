@@ -1,5 +1,9 @@
-<h1>Title: <%= @post.title %></h1>
+<h2 class="text-center mx-auto text-muted">Title: <%= @post.title %></h2>
 
 <%= render partial: 'form', locals: { post: @post, comment: @comment, path: post_comments_path(@post) } %>
 <br>
-<%= link_to 'All Posts', posts_path, class: "btn btn-secondary" %>
+<div class="d-flex justify-content-center">
+  <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+    <%= link_to 'All Posts', posts_path, class: "btn btn-secondary" %> 
+  </div>
+</div>

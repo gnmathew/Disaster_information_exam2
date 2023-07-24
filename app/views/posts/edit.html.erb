@@ -1,6 +1,10 @@
-<h1>Edit Post Disaster id: <%= @post.id %></h1>
+<h1 class="text-center text-muted">Edit Post Disaster id: <%= @post.id %></h1>
 
 <%= render partial: 'form', locals: { post: @post } %>
 <br>
 
-<%= link_to 'All Posts', posts_path, class: "btn btn-secondary" %>
+<div class="d-flex justify-content-center">
+  <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+    <%= link_to 'All Posts', posts_path, class: "btn btn-dark" %> 
+  </div>
+</div>
